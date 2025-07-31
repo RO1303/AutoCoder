@@ -12,6 +12,7 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
+        run: echo ${{ join(github.event.issue.labels.*.name, ' ') }}
       - name: Set permissions for script.sh
         run: chmod +x $GPT_SCRIPT
       - name: Run script.sh
