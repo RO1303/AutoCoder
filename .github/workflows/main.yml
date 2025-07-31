@@ -4,15 +4,13 @@ on:
     types: [opened, reopened, labeled]
 jobs:
   generate-code:
-    # if: contains(${{ join(github.event.issue.labels.*.name, ' ') }}, 'autocoder-bot')
-    if: ${{ contains(join(github.event.issue.labels.*.name, ','), 'autocoder-bot') }}$
+    if: contains(github.event.issue.labels.*.name, 'autocoder-bot')
+    # if: ${{ contains(join(github.event.issue.labels.*.name, ','), 'autocoder-bot') }}$
     env:
       GPT_SCRIPT: ./scripts/script.sh
       ISSUE_NUMBER: ${{ github.event.issue.number }}
     runs-on: ubuntu-latest
     steps:
-      - name: List labels
-        run: echo ${{ join(github.event.issue.labels.*.name, ' ') }}
       - name: Checkout repository
         uses: actions/checkout@v4
       - name: Set permissions for script.sh
