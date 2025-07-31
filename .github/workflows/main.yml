@@ -5,7 +5,6 @@ on:
 jobs:
   generate-code:
     if: contains(github.event.issue.labels.*.name, 'autocoder-bot')
-    # if: ${{ contains(join(github.event.issue.labels.*.name, ','), 'autocoder-bot') }}$
     env:
       GPT_SCRIPT: ./scripts/script.sh
       ISSUE_NUMBER: ${{ github.event.issue.number }}
@@ -14,9 +13,9 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
       - name: Set permissions for script.sh
-        run: chmod +x $GPT_SCRIPT
+        run: chmod +x ./scripts/script.sh
       - name: Run script.sh
-        run: $GPT_SCRIPT ${{ secrets.GITHUB_TOKEN }} $GITHUB_REPOSITORY $ISSUE_NUMBER ${{ secrets.OPENAI_API_KEY }}
+        run: ./scripts/script.sh ${{ secrets.GITHUB_TOKEN }} $GITHUB_REPOSITORY $ISSUE_NUMBER ${{ secrets.OPENAI_API_KEY }}
       - name: Upload generated files as artifacts
         uses: actions/upload-artifact@v4
         with:
