@@ -11,9 +11,14 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
       - name: Set permissions for script.sh
-        run: chmod u+x $GPT_SCRIPT
+        run: echo "Set permissions for script.sh" 
+          chmod u+x $GPT_SCRIPT
       - name: Run script.sh
-        run: $GPT_SCRIPT
+        run: echo "Run script.sh" 
+          $GPT_SCRIPT
       - name: Upload generated files as artifacts
+        run: echo "Upload generated files as artifacts"
       - name: Download artifacts
+        run: echo "Download artifacts"
       - name: List files in the artifact
+        run: echo "List files in the artifact"
