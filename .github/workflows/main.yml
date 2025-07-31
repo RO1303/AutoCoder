@@ -6,6 +6,7 @@ jobs:
   generate-code:
     env:
       GPT_SCRIPT: ./scripts/script.sh
+      ISSUE_NUMBER: ${{ github.event.issue.number }}
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
@@ -15,7 +16,7 @@ jobs:
           chmod u+x $GPT_SCRIPT
       - name: Run script.sh
         run: echo "Run script.sh" 
-          $GPT_SCRIPT
+          $GPT_SCRIPT ${{ secrets.GITHUB_TOKEN }} $GITHUB_REPOSITORY $ISSUE_NUMBER ${{ secrets.OPENAI_API_KEY }}
       - name: Upload generated files as artifacts
         run: echo "Upload generated files as artifacts"
       - name: Download artifacts
