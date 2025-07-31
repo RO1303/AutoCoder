@@ -12,7 +12,8 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
       - name: Set permissions for script.sh
-        run: echo "Set permissions for script.sh" 
+        run: echo "Set permissions for script.sh"
+          ls -R .
           chmod +x $GPT_SCRIPT
       - name: Run script.sh
         run: echo "Run script.sh" 
