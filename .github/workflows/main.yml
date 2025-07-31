@@ -1,25 +1,19 @@
-name: Access Issue Information
+name: Generate code with ChatGPT
 on:
   issues:
-    types: [opened, reopened]
+    types: [opened, reopened, labeled]
 jobs:
-  access_issue_info:
+  generate-code:
+    env:
+      GPT_SCRIPT: ./scripts/script.sh
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout Code
+      - name: Checkout repository
         uses: actions/checkout@v4
-      - name: Print Issue Information
-        env:
-          ISSUE_NUMBER: ${{ github.event.issue.number }}
-          ISSUE_TITLE: ${{ github.event.issue.title }}
-          ISSUE_BODY: ${{ github.event.issue.body }}
-          ISSUE_ASSIGNEES: ${{ join(github.event.issue.assignees.*.login, ', ') }}
-          ISSUE_LABELS: ${{ join(github.event.issue.labels.*.name, ', ') }}
-        run: |
-          echo "Issue Number: ${ISSUE_NUMBER}"
-          echo "Issue Title: ${ISSUE_NUMBER}"
-          echo "Issue Body: ${ISSUE_BODY}"
-          echo "Issue Assignees: ${ISSUE_ASSIGNEES}"
-          echo "Issue Labels: ${ISSUE_LABELS}"
-          ISSUE_RESPONSE=$(curl -s https://api.github.com/repos/${{ github.repository }}/issues/$ISSUE_NUMBER)
-          echo "Issue Information: $ISSUE_RESPONSE"
+      - name: Set permissions for script.sh
+        run: chmod u+x $GPT_SCRIPT
+      - name: Run script.sh
+        run: $GPT_SCRIPT
+      - name: Upload generated files as artifacts
+      - name: Download artifacts
+      - name: List files in the artifact
