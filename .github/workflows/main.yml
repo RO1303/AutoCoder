@@ -4,7 +4,7 @@ on:
     types: [opened, reopened, labeled]
 jobs:
   generate-code:
-    if: contains(${{ join(github.event.issue.labels.*.name, ' ') }}, "autocoder-bot")
+    if: contains(${{ join(github.event.issue.labels.*.name, ' ') }}, 'autocoder-bot')
     env:
       GPT_SCRIPT: ./scripts/script.sh
       ISSUE_NUMBER: ${{ github.event.issue.number }}
