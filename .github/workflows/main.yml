@@ -13,8 +13,8 @@ jobs:
         uses: actions/checkout@v4
       - name: Set permissions for script.sh
         run: echo "Set permissions for script.sh"
-          ls -R .
-          chmod +x $GPT_SCRIPT
+          ls -R
+          # chmod +x $GPT_SCRIPT
       - name: Run script.sh
         run: echo "Run script.sh" 
           $GPT_SCRIPT ${{ secrets.GITHUB_TOKEN }} $GITHUB_REPOSITORY $ISSUE_NUMBER ${{ secrets.OPENAI_API_KEY }}
