@@ -15,9 +15,11 @@ jobs:
         run: echo "Set permissions for script.sh" 
           chmod u+x $GPT_SCRIPT
       - name: Run script.sh
+        id: generate_code
         run: echo "Run script.sh" 
           $GPT_SCRIPT ${{ secrets.GITHUB_TOKEN }} $GITHUB_REPOSITORY $ISSUE_NUMBER ${{ secrets.OPENAI_API_KEY }}
       - name: Upload generated files as artifacts
+        needs: generate_code
         run: echo "Upload generated files as artifacts"
       - name: Download artifacts
         run: echo "Download artifacts"
