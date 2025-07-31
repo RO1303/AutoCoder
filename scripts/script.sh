@@ -38,8 +38,6 @@ save_to_file() {
     echo "The code has been written to $filename"
 }
 
-echo "Script started"
-
 # Fetch and process issue details
 RESPONSE=$(fetch_issue_details)
 ISSUE_BODY=$(echo "$RESPONSE" | jq -r .body)
