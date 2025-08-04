@@ -15,10 +15,6 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
-      - name: Change user and mail
-        run: |
-          git config --global user.name autocoder-bot;
-          git config --global user.email actions@github.com
       - name: Set permissions for script.sh
         run: chmod +x ./scripts/script.sh
       - name: Run script.sh
@@ -41,3 +37,4 @@ jobs:
           base: main
           branch: autocoder-branch-issueNumber
           labels: autocoder-bot
+          committer: autocoder-bot <actions@github.com>
