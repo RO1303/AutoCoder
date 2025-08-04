@@ -38,3 +38,4 @@ jobs:
           branch: autocoder-branch-issueNumber
           labels: autocoder-bot
           committer: autocoder-bot <actions@github.com>
+          author: autocoder-bot <actions@github.com>
