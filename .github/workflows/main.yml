@@ -9,6 +9,9 @@ jobs:
       GPT_SCRIPT: ./scripts/script.sh
       ISSUE_NUMBER: ${{ github.event.issue.number }}
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      pull-requests: write
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
@@ -28,3 +31,9 @@ jobs:
           path: autocoder-artifact/
       - name: List files in the artifact
         run: ls -R autocoder-artifact/
+      - name: Create Pull Requecdst
+        uses: peter-evans/create-pull-request@v7
+        with:
+          base: main
+          branch: autocoder-branch-issueNumber
+          labels: autocoder-bot
