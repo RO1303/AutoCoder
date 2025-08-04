@@ -35,7 +35,7 @@ jobs:
         uses: peter-evans/create-pull-request@v7
         with:
           base: main
-          branch: autocoder-branch-issueNumber
+          branch: autocoder-branch-${{ github.event.issue.number }}
           labels: autocoder-bot
           committer: autocoder-bot <actions@github.com>
           author: autocoder-bot <actions@github.com>
