@@ -9,6 +9,11 @@ outputs:
   random-number:
     description: "Random number"
     value: ${{ steps.random-number-generator.outputs.random-number }}
+  pull_request_url:
+    description: 'The URL of the pull request that has been automatically created, containing the auto-generated code for review and potential merging.'
+    value: "Roland"
+    #${{ steps.outputs.output1 }}
+
 runs:
   using: "composite"
   steps:
