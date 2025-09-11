@@ -39,7 +39,7 @@ runs:
       run: echo ${{ inputs.repository }}
       shell: bash
     - name: Output
-      run: echo "Output=This is my output" >> $GITHUB_ENV
+      run: echo "This is my output" >> $GITHUB_ENV
       shell: bash
 
 #    - name: Generate Code from Issue
