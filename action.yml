@@ -1,10 +1,34 @@
-name: 'Hello World'
-description: 'Greet someone'
+name: 'AutoCoder'
+description: 'This action automates the process of generating code from GitHub issues using OpenAIs ChatGPT and subsequently creates a pull request with the generated code for review.'
+author: 'Roland Onderka'
+
 inputs:
   who-to-greet:  # id of input
     description: 'Who to greet'
     required: true
     default: 'World'
+
+  github_token:
+    description: 'Personal access token (PAT) used for GitHub API authentication. This token is required to create pull requests and handle other repository interactions.'
+    required: true
+  repository:
+    description: 'The repository where the action will be executed.'
+    required: true
+  issue_number:
+    description: 'The number of the issue that triggered the action.'
+    required: true
+  script_path:
+    description: 'The path to the script that interacts with ChatGPT and generates code.'
+    required: true
+  openai_api_key:
+    description: 'API key for OpenAI, enabling interactions with the ChatGPT service to generate code based on issue descriptions.'
+    required: true
+  issue_label:
+    description: 'The label assigned to GitHub issues that should be processed by the AutoCoder action. Only issues with this label will trigger the code generation process.'
+    required: true
+    default: 'autocoder-bot'
+
+
 outputs:
   random-number:
     description: "Random number"
