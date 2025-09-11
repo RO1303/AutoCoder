@@ -1,11 +1,20 @@
 
 name: 'AutoCoder'
 description: 'This action automates the process of generating code from GitHub issues using OpenAIs ChatGPT and subsequently creates a pull request with the generated code for review.'
-author: 'Your Name or Organization'
+author: 'Roland Onderka'
 
 inputs:
   github_token:
     description: 'Personal access token (PAT) used for GitHub API authentication. This token is required to create pull requests and handle other repository interactions.'
+    required: true
+  repository:
+    description: 'The repository where the action will be executed.'
+    required: true
+  issue_number:
+    description: 'The number of the issue that triggered the action.'
+    required: true
+  script_path:
+    description: 'The path to the script that interacts with ChatGPT and generates code.'
     required: true
   openai_api_key:
     description: 'API key for OpenAI, enabling interactions with the ChatGPT service to generate code based on issue descriptions.'
@@ -15,9 +24,9 @@ inputs:
     required: true
     default: 'autocoder-bot'
 
-outputs:
-  pull_request_url:
-    description: 'The URL of the pull request that has been automatically created, containing the auto-generated code for review and potential merging.'
+#outputs:
+#  pull_request_url:
+#    description: 'The URL of the pull request that has been automatically created, containing the auto-generated code for review and potential merging.'
 
 runs:
   using: 'composite'
@@ -25,17 +34,31 @@ runs:
     - name: Greet Users
       run: echo "Hello, welcome to AutoCoder! Let's generate some code."
       shell: bash
-    - name: Generate Code from Issue
-      run: |
-        # The script that interacts with ChatGPT and generates code goes here.
+    - name: Inputs
+      run: echo ${{ inputs.repository }}
       shell: bash
-      env:
-        GITHUB_TOKEN: ${{ inputs.github_token }}
-        OPENAI_API_KEY: ${{ inputs.openai_api_key }}
-    - name: Create Pull Request
-      run: |
-        # The script that creates a pull request with the generated code goes here.
-      shell: bash
-      env:
-        GITHUB_TOKEN: ${{ inputs.github_token }}
+
+
+#    - name: Generate Code from Issue
+#      run: $SCRIPT_PATH $GITHUB_TOKEN $GITHUB_REPOSITORY $ISSUE_NUMBER $OPENAI_API_KEY
+#      shell: bash
+#      env:
+#        SCRIPT_PATH: ${{ inputs.script_path }}
+#        GITHUB_TOKEN: ${{ inputs.github_token }}
+#        GITHUB_REPOSITORY: ${{ inputs.repository }}
+#        ISSUE_NUMBER: ${{ inputs.issue_number }}
+#        OPENAI_API_KEY: ${{ inputs.openai_api_key }}
+#    - name: Create Pull Request
+#      uses: peter-evans/create-pull-request@v7
+#      with:
+#        base: main
+#        branch: autocoder-branch-${{ inputs.issue_number }}
+#        title: autocoder-branch-#${{ inputs.issue_number }}
+#        labels:  ${{ inputs.issue_label }}
+#        committer: autocoder-bot <actions@github.com>
+#        author: autocoder-bot <actions@github.com>
+#
+#      shell: bash
+#      env:
+#        GITHUB_TOKEN: ${{ inputs.github_token }}
     # Add additional steps as necessary, replicating the logic from your original workflow.
