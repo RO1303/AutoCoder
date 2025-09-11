@@ -27,7 +27,7 @@ inputs:
 outputs:
   pull_request_url:
     description: 'The URL of the pull request that has been automatically created, containing the auto-generated code for review and potential merging.'
-    value: ${{ steps.output1 }}
+    value: ${{ steps.outputs.output1 }}
 
 runs:
   using: 'composite'
@@ -38,7 +38,7 @@ runs:
     - name: Inputs
       run: echo ${{ inputs.repository }}
       shell: bash
-    - id: output1
+    - id: outputs
       run: echo "output1=This is my output" >> $GITHUB_OUTPUT
       shell: bash
 
