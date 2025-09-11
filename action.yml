@@ -24,9 +24,10 @@ inputs:
     required: true
     default: 'autocoder-bot'
 
-#outputs:
-#  pull_request_url:
-#    description: 'The URL of the pull request that has been automatically created, containing the auto-generated code for review and potential merging.'
+outputs:
+  pull_request_url:
+    description: 'The URL of the pull request that has been automatically created, containing the auto-generated code for review and potential merging.'
+    value: ${{ runs.steps.Output }}
 
 runs:
   using: 'composite'
@@ -37,7 +38,9 @@ runs:
     - name: Inputs
       run: echo ${{ inputs.repository }}
       shell: bash
-
+    - name: Output
+      run: echo "This is my output" >> "$GITHUB_OUTPUT"
+      shell: bash
 
 #    - name: Generate Code from Issue
 #      run: $SCRIPT_PATH $GITHUB_TOKEN $GITHUB_REPOSITORY $ISSUE_NUMBER $OPENAI_API_KEY
