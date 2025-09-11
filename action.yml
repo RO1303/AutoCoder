@@ -27,7 +27,8 @@ inputs:
 outputs:
   pull_request_url:
     description: 'The URL of the pull request that has been automatically created, containing the auto-generated code for review and potential merging.'
-    value: ${{ steps.outputs.output1 }}
+    value: "Roland"
+    #${{ steps.outputs.output1 }}
 
 runs:
   using: 'composite'
