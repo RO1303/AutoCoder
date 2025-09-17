@@ -1,42 +1,24 @@
-name: Generate code with ChatGPT
+name: AutoCodeGen
 on:
   issues:
-    types: [opened, reopened, labeled]
+    types: [labeled]
+
 jobs:
-  generate-code:
-    if: contains(github.event.issue.labels.*.name, 'autocoder-bot')
-    env:
-      GPT_SCRIPT: ./scripts/script.sh
-      ISSUE_NUMBER: ${{ github.event.issue.number }}
+  generate_code:
     runs-on: ubuntu-latest
-    permissions:
-      contents: write
-      pull-requests: write
     steps:
-      - name: Checkout repository
+      - name: Checkout
         uses: actions/checkout@v4
-      - name: Set permissions for script.sh
-        run: chmod +x ./scripts/script.sh
-      - name: Run script.sh
-        run: ./scripts/script.sh ${{ secrets.GITHUB_TOKEN }} $GITHUB_REPOSITORY $ISSUE_NUMBER ${{ secrets.OPENAI_API_KEY }}
-      - name: Upload generated files as artifacts
-        uses: actions/upload-artifact@v4
+      - id: foo
+        uses: RO1303/AutoCoder@main
         with:
-          name: autocoder-artifact
-          path: autocoder-bot/
-      - name: Download artifacts
-        uses: actions/download-artifact@v4
-        with:
-          name: autocoder-artifact
-          path: autocoder-artifact/
-      - name: List files in the artifact
-        run: ls -R autocoder-artifact/
-      - name: Create Pull Request
-        uses: peter-evans/create-pull-request@v7
-        with:
-          base: main
-          branch: autocoder-branch-${{ github.event.issue.number }}
-          title: autocoder-branch-#${{ github.event.issue.number }}
-          labels: autocoder-bot
-          committer: autocoder-bot <actions@github.com>
-          author: autocoder-bot <actions@github.com>
+          GITHUB_TOKEN: $\{{ secrets.GITHUB_TOKEN }}
+          REPOSITORY: $GITHUB_REPOSITORY
+          ISSUE_NUMBER: ${{ github.event.issue.number }}
+          SCRIPT_PATH: RO1303/AutoCoder/scripts
+          OPENAI_API_KEY: $\{{ secrets.OPENAI_API_KEY }}
+          LABEL: 'autocoder'
+
+      - run: echo ${{ steps.foo.outputs.pull_request_url }}
+        shell: bash
+
