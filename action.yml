@@ -41,11 +41,8 @@ outputs:
 runs:
   using: "composite"
   steps:
-    - name: ls
-      run: ls -al ${{ github.action_path }}
-      shell: bash
     - name: Set Greeting
-      run: $SCRIPT_PATH/hello.sh $INPUT_WHO_TO_GREET
+      run: ${{ github.action_path }}/scripts/hello.sh $INPUT_WHO_TO_GREET
       shell: bash
       env:
         INPUT_WHO_TO_GREET: ${{ inputs.who-to-greet }}
