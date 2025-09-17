@@ -61,7 +61,8 @@ runs:
       run: echo "Hello, welcome to AutoCoder! Let's generate some code."
       shell: bash
     - name: Generate Code from Issue
-      run: ${{ github.action_path }}/scripts/script.sh $GITHUB_TOKEN $GITHUB_REPOSITORY $ISSUE_NUMBER $OPENAI_API_KEY
+      # run: ${{ github.action_path }}/scripts/script.sh $GITHUB_TOKEN $GITHUB_REPOSITORY $ISSUE_NUMBER $OPENAI_API_KEY
+      run: echo $GITHUB_TOKEN $GITHUB_REPOSITORY $ISSUE_NUMBER $OPENAI_API_KEY
       shell: bash
       env:
         SCRIPT_PATH: ${{ inputs.script_path }}
