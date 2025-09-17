@@ -41,6 +41,9 @@ outputs:
 runs:
   using: "composite"
   steps:
+    - name: ls
+      run: ls -al
+      shell: bash
     - name: Set Greeting
       run: $SCRIPT_PATH/hello.sh $INPUT_WHO_TO_GREET
       shell: bash
