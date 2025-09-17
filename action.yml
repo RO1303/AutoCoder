@@ -41,6 +41,10 @@ runs:
     - name: Greet Users
       run: echo "Hello, welcome to AutoCoder! Let's generate some code."
       shell: bash
+      
+    - name: Checkout repository
+      uses: actions/checkout@v4
+
     - name: Set permissions for script.sh
       run: chmod +x ${{ github.action_path }}/scripts/script.sh
 
