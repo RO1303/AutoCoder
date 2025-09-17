@@ -48,7 +48,7 @@ runs:
     - name: Set permissions for script.sh
       run: chmod +x ${{ github.action_path }}/scripts/script.sh
       
-    - name: interact with ChatGPT:
+    - name: interact with ChatGPT
       run: ${{ github.action_path }}/scripts/script.sh $GITHUB_TOKEN $GITHUB_REPOSITORY $ISSUE_NUMBER $OPENAI_API_KEY
       # run: echo $GITHUB_TOKEN $GITHUB_REPOSITORY $ISSUE_NUMBER $OPENAI_API_KEY
       shell: bash
