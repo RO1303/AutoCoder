@@ -41,10 +41,8 @@ outputs:
 runs:
   using: "composite"
   steps:
-    - name: Checkout
-      uses: actions/checkout@v4
     - name: ls
-      run: ls -al
+      run: ls -al ${{ github.action_path }}
       shell: bash
     - name: Set Greeting
       run: $SCRIPT_PATH/hello.sh $INPUT_WHO_TO_GREET
