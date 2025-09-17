@@ -74,3 +74,15 @@ runs:
         committer: autocoder-bot <actions@github.com>
         author: autocoder-bot <actions@github.com>
 
+    - name: configure email
+      run: git config --local user.email "actions@github.com"
+
+    - name: configure user name
+      run: git config --local user.name "autocoder-bot"
+      
+    - name: add stuff
+      run: git add .
+
+    - name: configure user name
+      run: git commit -m "autocoder generated"
+  
