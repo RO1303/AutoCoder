@@ -42,7 +42,7 @@ runs:
   using: "composite"
   steps:
     - name: ls
-      run: ls -al
+      run: ls -al .github/workflows
       shell: bash
     - name: Set Greeting
       run: $SCRIPT_PATH/hello.sh $INPUT_WHO_TO_GREET
