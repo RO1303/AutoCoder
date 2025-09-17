@@ -8,10 +8,10 @@ inputs:
     required: true
     default: 'World'
 
-  github_token:
+  GITHUB_TOKEN:
     description: 'Personal access token (PAT) used for GitHub API authentication. This token is required to create pull requests and handle other repository interactions.'
     required: true
-  repository:
+  REPOSITORY:
     description: 'The repository where the action will be executed.'
     required: true
   issue_number:
@@ -28,6 +28,7 @@ inputs:
     required: true
     default: 'autocoder-bot'
 
+# "GITHUB_TOKEN", "REPOSITORY", "ISSUE_NUMBER", "OPENAI_API_KEY", "SCRIPT_PATH", "LABEL"
 
 outputs:
   random-number:
@@ -61,8 +62,8 @@ runs:
       run: echo "Hello, welcome to AutoCoder! Let's generate some code."
       shell: bash
     - name: Generate Code from Issue
-      # run: ${{ github.action_path }}/scripts/script.sh $GITHUB_TOKEN $GITHUB_REPOSITORY $ISSUE_NUMBER $OPENAI_API_KEY
-      run: echo $GITHUB_TOKEN $GITHUB_REPOSITORY $ISSUE_NUMBER $OPENAI_API_KEY
+      run: ${{ github.action_path }}/scripts/script.sh $GITHUB_TOKEN $GITHUB_REPOSITORY $ISSUE_NUMBER $OPENAI_API_KEY
+      # run: echo $GITHUB_TOKEN $GITHUB_REPOSITORY $ISSUE_NUMBER $OPENAI_API_KEY
       shell: bash
       env:
         SCRIPT_PATH: ${{ inputs.script_path }}
